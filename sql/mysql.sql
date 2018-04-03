@@ -28,10 +28,12 @@ CREATE TABLE `admin_log_adminlog` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `api2_token` (
-  `key` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token_key` varchar(40) NOT NULL,
   `user` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
-  PRIMARY KEY (`key`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_key` (`token_key`),
   UNIQUE KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +43,8 @@ CREATE TABLE `api2_token` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `api2_tokenv2` (
-  `key` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token_key` varchar(40) NOT NULL,
   `user` varchar(255) NOT NULL,
   `platform` varchar(32) NOT NULL,
   `device_id` varchar(40) NOT NULL,
@@ -52,7 +55,8 @@ CREATE TABLE `api2_tokenv2` (
   `last_login_ip` char(39) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `wiped_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`key`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_key` (`token_key`),
   UNIQUE KEY `user` (`user`,`platform`,`device_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -64,7 +68,7 @@ CREATE TABLE `api2_tokenv2` (
 CREATE TABLE `avatar_avatar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `emailuser` varchar(255) NOT NULL,
-  `primary` tinyint(1) NOT NULL,
+  `is_primary` tinyint(1) NOT NULL,
   `avatar` varchar(1024) NOT NULL,
   `date_uploaded` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -89,10 +93,12 @@ CREATE TABLE `avatar_groupavatar` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_clientlogintoken` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(32) NOT NULL,
   `username` varchar(255) NOT NULL,
   `timestamp` datetime NOT NULL,
-  PRIMARY KEY (`token`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`),
   KEY `base_clientlogintoken_14c4b06b` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -269,10 +275,10 @@ CREATE TABLE `captcha_captchastore` (
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `constance_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) NOT NULL,
+  `constance_key` varchar(255) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `key` (`key`)
+  UNIQUE KEY `key` (`constance_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -315,19 +321,21 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'admin_log','0001_initial','2017-09-25 05:24:11.481714'),(2,'captcha','0001_initial','2017-09-25 05:24:11.499690'),(3,'contenttypes','0001_initial','2017-09-25 05:24:11.525681'),(4,'contenttypes','0002_remove_content_type_name','2017-09-25 05:24:11.584409'),(5,'database','0001_initial','2017-09-25 05:24:11.599982'),(6,'institutions','0001_initial','2017-09-25 05:24:11.653562'),(7,'institutions','0002_institutionquota','2017-09-25 05:24:11.735524'),(8,'invitations','0001_initial','2017-09-25 05:24:11.752853'),(9,'invitations','0002_invitation_invite_type','2017-09-25 05:24:11.783917'),(10,'invitations','0003_auto_20160510_1703','2017-09-25 05:24:11.807671'),(11,'invitations','0004_auto_20160629_1610','2017-09-25 05:24:11.855233'),(12,'invitations','0005_auto_20160629_1614','2017-09-25 05:24:11.867599'),(13,'post_office','0001_initial','2017-09-25 05:24:12.089393'),(14,'post_office','0002_add_i18n_and_backend_alias','2017-09-25 05:24:12.376311'),(15,'post_office','0003_auto_20170725_0206','2017-09-25 05:24:12.392530'),(16,'role_permissions','0001_initial','2017-09-25 05:24:12.408197'),(17,'sessions','0001_initial','2017-09-25 05:24:12.436008'),(18,'termsandconditions','0001_initial','2017-09-25 05:24:12.526533');
+INSERT INTO `django_migrations` VALUES (1,'admin_log','0001_initial','2018-04-03 08:14:48.074650'),(2,'captcha','0001_initial','2018-04-03 08:14:48.098675'),(3,'contenttypes','0001_initial','2018-04-03 08:14:48.142118'),(4,'contenttypes','0002_remove_content_type_name','2018-04-03 08:14:48.214767'),(5,'database','0001_initial','2018-04-03 08:14:48.238027'),(6,'institutions','0001_initial','2018-04-03 08:14:48.305336'),(7,'institutions','0002_institutionquota','2018-04-03 08:14:48.360964'),(8,'invitations','0001_initial','2018-04-03 08:14:48.391008'),(9,'invitations','0002_invitation_invite_type','2018-04-03 08:14:48.426227'),(10,'invitations','0003_auto_20160510_1703','2018-04-03 08:14:48.463960'),(11,'invitations','0004_auto_20160629_1610','2018-04-03 08:14:48.530231'),(12,'invitations','0005_auto_20160629_1614','2018-04-03 08:14:48.549801'),(13,'post_office','0001_initial','2018-04-03 08:14:48.867653'),(14,'post_office','0002_add_i18n_and_backend_alias','2018-04-03 08:14:49.373207'),(15,'role_permissions','0001_initial','2018-04-03 08:14:49.397845'),(16,'sessions','0001_initial','2018-04-03 08:14:49.438594'),(17,'termsandconditions','0001_initial','2018-04-03 08:14:49.561314');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `django_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime NOT NULL,
-  PRIMARY KEY (`session_key`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_key` (`session_key`),
   KEY `django_session_de54fa62` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -458,7 +466,7 @@ CREATE TABLE `invitations_invitation` (
 CREATE TABLE `notifications_notification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(512) NOT NULL,
-  `primary` tinyint(1) NOT NULL,
+  `is_primary` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -542,7 +550,7 @@ CREATE TABLE `post_office_attachment_emails` (
 CREATE TABLE `post_office_email` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `from_email` varchar(254) NOT NULL,
-  `to` longtext NOT NULL,
+  `to_email` longtext NOT NULL,
   `cc` longtext NOT NULL,
   `bcc` longtext NOT NULL,
   `subject` varchar(255) NOT NULL,
@@ -865,13 +873,15 @@ CREATE TABLE `tags_filetag` (
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags_fileuuidmap` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` char(32) NOT NULL,
   `repo_id` varchar(36) NOT NULL,
   `repo_id_parent_path_md5` varchar(100) NOT NULL,
   `parent_path` longtext NOT NULL,
   `filename` varchar(1024) NOT NULL,
   `is_dir` tinyint(1) NOT NULL,
-  PRIMARY KEY (`uuid`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
   KEY `tags_fileuuidmap_9a8c79bf` (`repo_id`),
   KEY `tags_fileuuidmap_c5bf47d4` (`repo_id_parent_path_md5`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -946,7 +956,7 @@ CREATE TABLE `two_factor_phonedevice` (
   `name` varchar(64) NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   `number` varchar(40) NOT NULL,
-  `key` varchar(40) NOT NULL,
+  `device_key` varchar(40) NOT NULL,
   `method` varchar(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user` (`user`)
@@ -991,7 +1001,7 @@ CREATE TABLE `two_factor_totpdevice` (
   `user` varchar(255) NOT NULL,
   `name` varchar(64) NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
-  `key` varchar(80) NOT NULL,
+  `device_key` varchar(80) NOT NULL,
   `step` smallint(5) unsigned NOT NULL,
   `t0` bigint(20) NOT NULL,
   `digits` smallint(5) unsigned NOT NULL,
