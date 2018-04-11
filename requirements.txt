@@ -15,3 +15,4 @@ django-formtools
 qrcode
 requests
 requests_oauthlib==0.8.0
+git+git://github.com/haiwen/python-cas.git@ffc49235fd7cc32c4fdda5acfa3707e1405881df#egg=python_cas
