@@ -1,0 +1,32 @@
+.side-panel {
+  height:100%;
+}
+.side-panel .nav {
+  border-bottom: 1px solid #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.side-panel .nav-link {
+  color: #888;
+}
+.side-panel .nav-link.active {
+  color: #eb8205;
+}
+.side-panel-content {
+  padding-top: 8px;
+  height: calc(100% - 36px);
+  overflow: auto;
+}
+.outline-h2 {
+  margin-left: 20px;
+  line-height: 2;
+  color:#364149;
+}
+.outline-h3 {
+  margin-left: 40px;
+  line-height: 2;
+  color:#364149;
+}
+.tree-view {
+  padding-left: 10px;
+}
