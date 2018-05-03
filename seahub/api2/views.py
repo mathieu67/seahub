@@ -402,6 +402,41 @@ class Search(APIView):
             error_msg = 'with_permission invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
+        time_from = request.GET.get('time_from', None)
+        time_to = request.GET.get('time_to', None)
+        if time_from is not None:
+            try:
+                time_from = int(time_from)
+            except:
+                error_msg = 'time_from invalid.'
+                return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+
+        if time_to is not None:
+            try:
+                time_to = int(time_to)
+            except:
+                error_msg = 'time_to invalid.'
+                return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+
+        size_from = request.GET.get('size_from', None)
+        size_to = request.GET.get('size_to', None)
+        if size_from is not None:
+            try:
+                size_from = int(size_from)
+            except:
+                error_msg = 'size_from invalid.'
+                return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+
+        if size_to is not None:
+            try:
+                size_to = int(size_to)
+            except:
+                error_msg = 'size_to invalid.'
+                return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+
+        time_range = (time_from, time_to)
+        size_range = (size_from, size_to)
+
         suffixes = None
         custom_ftypes =  request.GET.getlist('ftype') # types like 'Image', 'Video'... same in utils/file_types.py
         input_fileexts = request.GET.get('input_fexts', '') # file extension input by the user
@@ -444,7 +479,7 @@ class Search(APIView):
 
         # search file
         try:
-            results, total = search_files(repo_id_map, search_path, keyword, suffixes, start, size, org_id)
+            results, total = search_files(repo_id_map, search_path, keyword, suffixes, start, size, org_id, time_range=time_range, size_range=size_range)
         except Exception as e:
             logger.error(e)
             error_msg = 'Internal Server Error'
