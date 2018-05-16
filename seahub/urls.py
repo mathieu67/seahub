@@ -30,7 +30,7 @@ from seahub.api2.endpoints.shared_repos import SharedRepos, SharedRepo
 from seahub.api2.endpoints.upload_links import UploadLinks, UploadLink, \
         UploadLinkUpload
 from seahub.api2.endpoints.repos_batch import ReposBatchView, \
-        ReposBatchCopyDirView, ReposBatchCreateDirView
+        ReposBatchCopyDirView, ReposBatchCreateDirView, ReposBatchMoveDirView
 from seahub.api2.endpoints.repos import RepoView
 from seahub.api2.endpoints.file import FileView
 from seahub.api2.endpoints.file_history import FileHistoryView
@@ -246,6 +246,7 @@ urlpatterns = patterns(
     ## user::repos-batch-operate
     url(r'^api/v2.1/repos/batch/$', ReposBatchView.as_view(), name='api-v2.1-repos-batch'),
     url(r'^api/v2.1/repos/batch-copy-dir/$', ReposBatchCopyDirView.as_view(), name='api-v2.1-repos-batch-copy-dir'),
+    url(r'^api/v2.1/repos/batch-move-dir/$', ReposBatchMoveDirView.as_view(), name='api-v2.1-repos-batch-move-dir'),
     url(r'^api/v2.1/repos/batch-create-dir/$', ReposBatchCreateDirView.as_view(), name='api-v2.1-repos-batch-create-dir'),
 
     ## user::deleted repos
